@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+}
+
+group 'com.github.mp'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = 11
+    targetCompatibility = 11
+}
+
+dependencies {
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.9.0'
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.9.0'
+
+}
+
+test {
+    useTestNG() {
+        scanForTestClasses = false
+        testLogging.showStandardStreams = false
+        //systemProperty("cucumber.plugin", "pretty")
+        systemProperty("cucumber.publish.quiet", "true")
+//        setParallel('methods')
+//        setThreadCount(1)
+//        parallel='tests'
+//        threadCount=1
+        systemProperty("cukes.parallel",System.getProperty("parallel"))
+        if(getSystemProperties().get("cukes.parallel").toString().equalsIgnoreCase("true")){
+            systemProperty("dataproviderthreadcount","2")
+            println 'Parallel Enabled'
+            def mytags = System.getProperty("tags")+ " and not @nonparallel"
+            systemProperty("cucumber.filter.tags",mytags)
+            println mytags
+            println System.getProperty("tags")
+            println System.getProperty("cucumber.filter.tags")
+        }else{
+            systemProperty("dataproviderthreadcount","1")
+            println 'Parallel Disabled'
+            systemProperty("cucumber.filter.tags",System.getProperty("tags"))
+        }
+    }
+   // include("**/TestRunner.java")
+}
+
+
+
+//configurations {
+//    cucumberRuntime {
+//        extendsFrom testImplementation
+//    }
+//}
+//
+//task cucumber() {
+//    dependsOn assemble, testClasses
+//    doLast {
+//        javaexec {
+//            main = "io.cucumber.core.cli.Main"
+//            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+//            args = ['--plugin', 'pretty',
+//                    '--glue', 'com.github.mp.stepdefs', 'src/test/features']
+//        }
+//    }
+//}

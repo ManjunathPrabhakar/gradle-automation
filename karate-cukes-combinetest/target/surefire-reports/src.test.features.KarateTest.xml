@@ -1,0 +1,7 @@
+<testsuite failures="0" name="src/test/features/KarateTest.feature" skipped="0" tests="1" time="0.509554">
+  <testcase classname="src.test.features.KarateTest" name="Testing valid GET endpoint" time="0.509554">
+    <system-out>Given url 'https://www.google.com' ........................................ passed
+When method GET ........................................................... passed
+Then status 200 ........................................................... passed</system-out>
+  </testcase>
+</testsuite>

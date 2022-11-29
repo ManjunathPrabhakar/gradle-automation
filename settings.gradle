@@ -1,0 +1,6 @@
+rootProject.name = 'gradle-automation'
+include 'testngcukes-gradle'
+include 'junitcukes-gradle'
+include 'karate-cukes-combinetest'
+include 'project-configs'
+

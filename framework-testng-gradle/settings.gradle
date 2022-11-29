@@ -1,0 +1,4 @@
+rootProject.name = 'framework-testng-gradle'
+include 'project-configs'
+include 'project1-testcode'
+
